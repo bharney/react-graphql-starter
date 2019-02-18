@@ -26,9 +26,9 @@ const newProduct = (_, args, ctx) => {
 }
 
 const products = (_, args, ctx) => {
-  if (!ctx.user) {
-    throw new AuthenticationError()
-  }
+  // if (!ctx.user) {
+  //   throw new AuthenticationError()
+  // }
   return Product.find({})
     .lean()
     .exec()

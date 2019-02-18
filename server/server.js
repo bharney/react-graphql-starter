@@ -32,14 +32,29 @@ const start = async (connectionString) => {
       return { user }
     }
   })
-  await mongoose.connect(connectionString)
+  let opts = {}
+  await mongoose.connect(
+    connectionString,
+    { ...opts, useNewUrlParser: true }
+  )
+  // await mongoose.connect(connectionString,
+  //   {
+  //     poolSize: 20,
+  //     socketTimeoutMS: 480000,
+  //     keepAlive: 300000,
+  //     ssl: true,
+  //     sslValidate: false,
+  //     reconnectTries: 86400
+  //   })
   // await connect(process.env.clientId, process.env.clientSecret, process.env.vaultUri)
   const { url } = await server.listen({ port: config.port })
 
   console.log(`GQL server ready at ${url}`)
 }
 
-start(process.env.ConnectionString)
+
+start(config.dbUrl)
+// start(process.env.ConnectionString)
 
 // Initialize the express module and make it accessible via the app variable.
 const app = express()
