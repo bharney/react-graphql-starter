@@ -32,6 +32,7 @@ const login = async (_, args, ctx) => {
     }
     return result;
   })
+  console.log(user)
   if (user == null) {
     return new AuthenticationError()
   }

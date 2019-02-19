@@ -35,7 +35,8 @@
     "react-router-dom": "^4.3.1",
     "react-scripts": "^2.1.5",
     "rimraf": "^2.6.2",
-    "supertest": "^3.3.0"
+    "supertest": "^3.3.0",
+    "typescript": "^3.3.3"
   },
   "jest": {
     "verbose": true,
@@ -56,6 +57,7 @@
     "bcrypt": "^3.0.2",
     "cuid": "^2.1.4",
     "dotenv": "^6.2.0",
+    "formik": "^1.5.1",
     "graphql": "^14.0.2",
     "graphql-import": "^0.7.1",
     "graphql-tag": "^2.10.1",

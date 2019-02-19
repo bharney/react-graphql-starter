@@ -19,9 +19,9 @@ const product = (_, args, ctx) => {
 }
 
 const newProduct = (_, args, ctx) => {
-  if (!ctx.user || ctx.user.role !== roles.admin) {
-    throw new AuthenticationError()
-  }
+  // if (!ctx.user || ctx.user.role !== roles.admin) {
+  //   throw new AuthenticationError()
+  // }
   return Product.create({ ...args.input, createdBy: ctx.user._id })
 }
 
