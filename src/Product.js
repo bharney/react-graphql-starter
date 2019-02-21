@@ -21,15 +21,29 @@ mutation PostMutation(
     range: $range
  })
  {
-  name
-  price
-  image
-  type
-  description
-  createdBy{
-    _id
+    name
+    price
+    image
+    type
+    description
+    createdBy{
+      _id
+    }
   }
- }
+}`
+const GET_POSTS = gql`
+query {
+  products 
+  {
+    name
+    price
+    image
+    type
+    description
+    createdBy{
+      _id
+    }
+  }
 }`
 
 class Product extends Component {
@@ -48,60 +62,70 @@ class Product extends Component {
       <div>
         <ApolloConsumer>
           {(client) => (
-            <Formik
-              onSubmit={({ name, price, image, type, description }) => {
-                console.log(name)
-                client.mutate({
-                  mutation: { POST_MUTATION },
-                  variables: { name, price, image, type, description }
-                })
-              }}>
-              {props => {
-                const {
-                  values,
-                  touched,
-                  errors,
-                  dirty,
-                  isSubmitting,
-                  handleChange,
-                  handleBlur,
-                  handleSubmit,
-                  handleReset,
-                } = props;
-                return (
-                  <form onSubmit={handleSubmit}>
-                    <div>
-                      <label>Name:</label>
-                      <Field name="name" type="text" />
-                    </div>
-                    <div>
-                      <label>Price:</label>
-                      <Field name="price" type="number" />
-                    </div>
-                    <div>
-                      <label>Image:</label>
-                      <Field name="image" type="text" />
-                    </div>
-                    <div>
-                      <label>Type:</label>
-                      <Field name="type" type="text" />
-                    </div>
-                    <div>
-                      <label>Description:</label>
-                      <Field name="description" type="text" />
-                      <button type="submit">Submit</button>
-                    </div>
-                    <div style={{ margin: '1rem 0' }}>
-                      <h3 style={{ fontFamily: 'monospace' }} />
-                      <pre>
-                        <strong>props</strong> ={' '}
-                        {JSON.stringify(props, null, 2)}
-                      </pre>
-                    </div>
-                  </form>
-                );
-              }}
-            </Formik>
+            <Mutation
+              mutation={POST_MUTATION}
+            >
+              {(newProduct, { loading, error }) => (
+                <Formik
+                  onSubmit={({ name, price, image, type, description, range }, { resetForm }) => {
+                    console.log(name)
+                    newProduct({ variables: { name, price, image, type, description, range } })
+                    resetForm({})
+                    console.log("test")
+                  }}>
+                  {props => {
+                    const {
+                      values,
+                      touched,
+                      errors,
+                      dirty,
+                      isSubmitting,
+                      handleChange,
+                      handleBlur,
+                      handleSubmit,
+                      handleReset,
+                    } = props;
+                    return (
+
+                      <form onSubmit={handleSubmit}>
+                        <div>
+                          <label>Name:</label>
+                          <Field name="name" type="text" />
+                        </div>
+                        <div>
+                          <label>Price:</label>
+                          <Field name="price" type="number" />
+                        </div>
+                        <div>
+                          <label>Image:</label>
+                          <Field name="image" type="text" />
+                        </div>
+                        <div>
+                          <label>Type:</label>
+                          <Field name="type" type="text" />
+                        </div>
+                        <div>
+                          <label>Description:</label>
+                          <Field name="description" type="text" />
+                        </div>
+                        <div>
+                          <label>Range:</label>
+                          <Field name="range" type="text" />
+                        </div>
+                        <button type="submit">Submit</button>
+                        <div style={{ margin: '1rem 0' }}>
+                          <h3 style={{ fontFamily: 'monospace' }} />
+                          <pre>
+                            <strong>props</strong> ={' '}
+                            {JSON.stringify(props, null, 2)}
+                          </pre>
+                        </div>
+                      </form>
+                    );
+                  }}
+                </Formik>
+              )}
+            </Mutation>
           )}
         </ApolloConsumer>
         <LinkList />
