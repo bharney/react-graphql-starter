@@ -10,7 +10,7 @@ import user from './types/user/user.resolvers'
 import mongoose from 'mongoose'
 import { config as getEnvironmentVariables } from "dotenv"
 import express from "express";
-
+import cors from "cors";
 getEnvironmentVariables()
 
 
@@ -58,6 +58,11 @@ start(config.dbUrl)
 
 // Initialize the express module and make it accessible via the app variable.
 const app = express()
+var corsOptions = {
+  origin: 'localhost:3000',
+  credentials: true
+};
+app.use(cors(corsOptions));
 
 app.get('/', async (req, res) => {
   res.send('Hello World!')

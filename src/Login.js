@@ -1,29 +1,14 @@
 import React, { Component } from 'react';
-import { Mutation } from 'react-apollo'
-import gql from 'graphql-tag'
+import { Mutation } from 'react-apollo';
+import gql from 'graphql-tag';
+import { Formik, Field } from 'formik';
 
 class Login extends Component {
   state = {
-    email: '',
-    password: ''
+    loggedIn: false
   };
 
-  handleChangeEmail = (event) => {
-    this.setState({ email: event.target.value });
-  }
-
-  handleChangePassword = (event) => {
-    this.setState({ password: event.target.value });
-  }
-
-  handleSubmit = (event) => {
-    alert('A name was submitted: ' + this.state.email);
-    event.preventDefault();
-  }
-
-
   render() {
-
     const POST_MUTATION = gql`
       mutation PostMutation($email: String!, $password: String!) {
       login(input: {
@@ -36,24 +21,49 @@ class Login extends Component {
           role
         }
     }`
-    const { email, password } = this.state;
+    const { loggedIn } = this.state;
     return (
-      <Mutation mutation={POST_MUTATION} variables={{ email, password }} onCompleted={() => this.props.history.push('/')} >
-        {() => (
-          <form onSubmit={this.handleSubmit}>
-            <label>
-              Email:
-          <input type="text" value={email} type="email" onChange={this.handleChangeEmail} />
-            </label>
-            <label>
-              Password:
-          <input type="text" value={password} type="password" onChange={this.handleChangePassword} />
-            </label>
-            <button type="submit">Submit</button>
-          </form>
-        )}
-      </Mutation>
-
+      loggedIn ? <div></div> :
+        <Mutation mutation={POST_MUTATION}>
+          {(login) => (
+            <div>
+              <Formik
+                initialValues={{ email: '', password: '' }}
+                onSubmit={({ email, password }, { resetForm }) => {
+                  login({ variables: { email, password } })
+                  this.setState({ loggedIn: true })
+                  resetForm()
+                }}>
+                {props => {
+                  const {
+                    values,
+                    touched,
+                    errors,
+                    dirty,
+                    isSubmitting,
+                    handleChange,
+                    handleBlur,
+                    handleSubmit,
+                    handleReset,
+                  } = props;
+                  return (
+                    <form onSubmit={handleSubmit}>
+                      <div>
+                        <label>Email:</label>
+                        <Field name="email" value={values.email} required type="text" />
+                      </div>
+                      <div>
+                        <label>Password:</label>
+                        <Field name="password" value={values.password} required type="password" />
+                      </div>
+                      <button type="submit">Submit</button>
+                    </form>
+                  );
+                }}
+              </Formik>
+            </div>
+          )}
+        </Mutation>
     );
   }
 }
