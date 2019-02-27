@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Link from './Link'
+import Link from '../Link'
 import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
 
@@ -7,6 +7,7 @@ const FEED_QUERY = gql`
   {
     products
     {
+        _id
         description
   	    price
         image
@@ -19,7 +20,7 @@ const FEED_QUERY = gql`
     }
   }
 `
-class LinkList extends Component {
+class ProductList extends Component {
     render() {
         return (
             <Query query={FEED_QUERY}>
@@ -40,4 +41,4 @@ class LinkList extends Component {
     }
 }
 
-export default LinkList
+export default ProductList

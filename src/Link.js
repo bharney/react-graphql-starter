@@ -4,7 +4,7 @@ class Link extends Component {
     render() {
         return (
             <li>
-                {this.props.link.name} ({this.props.link.description})
+                {this.props.link._id} - {this.props.link.name} ({this.props.link.description})
             </li>
         )
     }

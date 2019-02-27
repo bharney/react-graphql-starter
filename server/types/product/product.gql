@@ -12,6 +12,7 @@ enum BikeType {
 }
 
 interface Product {
+  _id: ID!
   name: String!
   price: Float!
   image: String!
@@ -21,6 +22,7 @@ interface Product {
 }
 
 type GamingPc implements Product {
+  _id: ID!
   name: String!
   price: Float!
   image: String!
@@ -31,6 +33,7 @@ type GamingPc implements Product {
 }
 
 type Bike implements Product {
+  _id: ID!
   name: String!
   price: Float!
   image: String!
@@ -41,6 +44,7 @@ type Bike implements Product {
 }
 
 type Drone implements Product {
+  _id: ID!
   name: String!
   price: Float!
   image: String!
@@ -63,7 +67,7 @@ input NewProductInput {
 
 input UpdateProductInput {
   name: String
-  price: String
+  price: Float!
   image: String
   description: String
   liquidCooled: Boolean
