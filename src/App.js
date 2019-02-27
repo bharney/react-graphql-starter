@@ -2,10 +2,10 @@ import React, { lazy, Component, Suspense } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import { Route, Switch } from 'react-router-dom'
-
 import Home from './Home';
 import Login from './Login';
 import Product from './Product';
+import PrivateRoute from "./PrivateRoute"
 
 class App extends Component {
   render() {
@@ -17,6 +17,7 @@ class App extends Component {
             <Route path='/login' component={Login}></Route>
             <Route path='/add' component={Product}></Route>
             <Route path='/' component={Home}></Route>
+            <PrivateRoute path="/protected" component={Product} />
           </Switch>
           <a
             className="App-link"
@@ -31,5 +32,6 @@ class App extends Component {
     );
   }
 }
+
 
 export default App;

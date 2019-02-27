@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
 import { Formik, Field } from 'formik';
+import { Redirect } from 'react-router-dom';
 
 class Login extends Component {
   state = {
-    loggedIn: false
+    redirectToReferrer: false
   };
 
   render() {
@@ -21,49 +22,53 @@ class Login extends Component {
           role
         }
     }`
-    const { loggedIn } = this.state;
+    const { from } = this.props.location.state || { from: { pathname: "/" } };
+    const { redirectToReferrer } = this.state;
+
+    if (redirectToReferrer) {
+      return <Redirect to={from} />;
+    }
     return (
-      loggedIn ? <div></div> :
-        <Mutation mutation={POST_MUTATION}>
-          {(login) => (
-            <div>
-              <Formik
-                initialValues={{ email: '', password: '' }}
-                onSubmit={({ email, password }, { resetForm }) => {
-                  login({ variables: { email, password } })
-                  this.setState({ loggedIn: true })
-                  resetForm()
-                }}>
-                {props => {
-                  const {
-                    values,
-                    touched,
-                    errors,
-                    dirty,
-                    isSubmitting,
-                    handleChange,
-                    handleBlur,
-                    handleSubmit,
-                    handleReset,
-                  } = props;
-                  return (
-                    <form onSubmit={handleSubmit}>
-                      <div>
-                        <label>Email:</label>
-                        <Field name="email" value={values.email} required type="text" />
-                      </div>
-                      <div>
-                        <label>Password:</label>
-                        <Field name="password" value={values.password} required type="password" />
-                      </div>
-                      <button type="submit">Submit</button>
-                    </form>
-                  );
-                }}
-              </Formik>
-            </div>
-          )}
-        </Mutation>
+      <Mutation mutation={POST_MUTATION}>
+        {(login) => (
+          <div>
+            <Formik
+              initialValues={{ email: '', password: '' }}
+              onSubmit={({ email, password }, { resetForm }) => {
+                login({ variables: { email, password } })
+                this.setState({ loggedIn: true })
+                resetForm()
+              }}>
+              {props => {
+                const {
+                  values,
+                  touched,
+                  errors,
+                  dirty,
+                  isSubmitting,
+                  handleChange,
+                  handleBlur,
+                  handleSubmit,
+                  handleReset,
+                } = props;
+                return (
+                  <form onSubmit={handleSubmit}>
+                    <div>
+                      <label>Email:</label>
+                      <Field name="email" value={values.email} required type="text" />
+                    </div>
+                    <div>
+                      <label>Password:</label>
+                      <Field name="password" value={values.password} required type="password" />
+                    </div>
+                    <button type="submit">Submit</button>
+                  </form>
+                );
+              }}
+            </Formik>
+          </div>
+        )}
+      </Mutation>
     );
   }
 }

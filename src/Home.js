@@ -5,7 +5,9 @@ import LinkList from './LinkList';
 class Home extends Component {
   render() {
     return (
+      <div>Home
       <LinkList />
+      </div>
     );
   }
 }
