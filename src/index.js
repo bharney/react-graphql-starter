@@ -18,7 +18,7 @@ const authLink = setContext((_, { headers }) => {
     return {
         headers: {
             ...headers,
-            authorization: "cjskmciat0000ygt79up5cprv",
+            authorization: "cjrwu5upt0002h8uee2unf24l",
         }
     }
 });

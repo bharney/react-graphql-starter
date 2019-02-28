@@ -18,7 +18,7 @@ mutation ProductMutation(
     name: $name
     price: $price
     image: $image
-    description: $description,
+    description: $description
     range: $range
  })
   {
@@ -54,7 +54,10 @@ class UpdateProduct extends Component {
     return (
       <Mutation
         mutation={PRODUCT_MUTATION}
-        refetchQueries={[{ query: GET_PRODUCT }]}>
+        refetchQueries={[{
+          query: GET_PRODUCT,
+          variables: { id }
+        }]}>
         {(updateProduct) => (
           <div>
             <Query query={GET_PRODUCT} variables={{ id }}>
