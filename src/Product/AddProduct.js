@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Mutation } from 'react-apollo'
 import gql from 'graphql-tag'
 import { Formik, Field } from 'formik';
-import LinkList from './LinkList';
+import ProductList from './ProductList';
 const PRODUCT_MUTATION = gql`
 mutation ProductMutation(
   $name: String!,
@@ -20,6 +20,7 @@ mutation ProductMutation(
     range: $range
  })
   {
+    _id
     name
     price
     image
@@ -34,6 +35,7 @@ const GET_PRODUCTS = gql`
 query {
   products 
   {
+    _id
     name
     price
     image
@@ -45,7 +47,7 @@ query {
   }
 }`
 
-class Product extends Component {
+class AddProduct extends Component {
   render() {
     return (
       <Mutation
@@ -53,7 +55,7 @@ class Product extends Component {
         refetchQueries={[{ query: GET_PRODUCTS }]}>
         {(newProduct) => (
           <div>
-            <LinkList />
+            <ProductList />
             <Formik
               initialValues={{ name: '', price: '', image: '', type: '', description: '', range: '' }}
               onSubmit={({ name, price, image, type, description, range }, { resetForm }) => {
@@ -111,4 +113,4 @@ class Product extends Component {
   }
 }
 
-export default Product;
+export default AddProduct;

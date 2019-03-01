@@ -5,9 +5,6 @@ import { Formik, Field } from 'formik';
 import { Redirect } from 'react-router-dom';
 
 class Login extends Component {
-  state = {
-    redirectToReferrer: false
-  };
 
   render() {
     const POST_MUTATION = gql`
@@ -22,12 +19,7 @@ class Login extends Component {
           role
         }
     }`
-    const { from } = this.props.location.state || { from: { pathname: "/" } };
-    const { redirectToReferrer } = this.state;
 
-    if (redirectToReferrer) {
-      return <Redirect to={from} />;
-    }
     return (
       <Mutation mutation={POST_MUTATION}>
         {(login) => (

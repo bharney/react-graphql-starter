@@ -10,9 +10,9 @@ const productsTypeMatcher = {
 
 /** product */
 const product = (_, args, ctx) => {
-  if (!ctx.user) {
-    throw new AuthenticationError()
-  }
+  // if (!ctx.user) {
+  //   throw new AuthenticationError()
+  // }
   return Product.findById(args.id)
     .lean()
     .exec()
@@ -35,9 +35,9 @@ const products = (_, args, ctx) => {
 }
 
 const updateProduct = (_, args, ctx) => {
-  if (!ctx.user || ctx.user.role !== roles.admin) {
-    throw new AuthenticationError()
-  }
+  // if (!ctx.user || ctx.user.role !== roles.admin) {
+  //   throw new AuthenticationError()
+  // }
   const update = args.input
   return Product.findByIdAndUpdate(args.id, update, { new: true })
     .lean()
@@ -45,9 +45,9 @@ const updateProduct = (_, args, ctx) => {
 }
 
 const removeProduct = (_, args, ctx) => {
-  if (!ctx.user || ctx.user.role !== roles.admin) {
-    throw new AuthenticationError()
-  }
+  // if (!ctx.user || ctx.user.role !== roles.admin) {
+  //   throw new AuthenticationError()
+  // }
   return Product.findByIdAndRemove(args.id)
     .lean()
     .exec()
