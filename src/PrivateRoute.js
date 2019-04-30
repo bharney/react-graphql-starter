@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom'
-import fakeAuth from "./Authenticate";
 
 class PrivateRoute extends Component {
   render() {
+    const { isAuthenticated } = this.props.auth
+
     return ({ component: Component, ...rest }) => (
       <Route
         {...rest}
         render={props =>
-          fakeAuth.isAuthenticated ? (
+          isAuthenticated() ? (
             <Component {...props} />
           ) : (
               <Redirect

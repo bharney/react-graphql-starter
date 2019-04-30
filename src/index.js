@@ -11,7 +11,7 @@ import { setContext } from 'apollo-link-context';
 import { BrowserRouter } from 'react-router-dom';
 
 const httpLink = createHttpLink({
-    uri: 'http://localhost:4002'
+    uri: process.env.NODE_ENV == 'production' ? 'https://react-graphql-starter.azurewebsites.net/graphql' : 'http://localhost:4002/graphql'
 })
 
 const authLink = setContext((_, { headers }) => {

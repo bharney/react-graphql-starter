@@ -6,7 +6,7 @@ const baseConfig = {
   env,
   isDev: env === 'development',
   isTest: env === 'testing',
-  port: 4002,
+  port: process.env.port || 4002,
   secrets: {
     jwt: process.env.JWT_SECRET,
     jwtExp: '100d'
@@ -16,6 +16,10 @@ const baseConfig = {
 let envConfig = {}
 
 switch (env) {
+  case 'prod':
+  case 'production':
+    envConfig = require('./prod').config
+    break
   case 'dev':
   case 'development':
     envConfig = require('./dev').config
