@@ -1,7 +1,6 @@
 import { User } from './user.model'
 import { AuthenticationError, ForbiddenError } from 'apollo-server'
 import { newApiKey } from '../../utils/auth'
-import bcrypt from 'bcrypt'
 
 const me = (_, args, ctx) => {
   if (!ctx.user) {
