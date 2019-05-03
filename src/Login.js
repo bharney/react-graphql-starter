@@ -26,8 +26,9 @@ class Login extends Component {
           <div>
             <Formik
               initialValues={{ email: '', password: '' }}
-              onSubmit={({ email, password }, { resetForm }) => {
-                login({ variables: { email, password } })
+              onSubmit={async ({ email, password }, { resetForm }) => {
+                const { data: { login: { apiKey } } } = await login({ variables: { email, password } })
+                localStorage.setItem("apiKey", apiKey)
                 this.setState({ loggedIn: true })
                 resetForm()
               }}>

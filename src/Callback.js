@@ -2,7 +2,6 @@ import React, { Component } from "react"
 
 class Callback extends Component {
   componentDidMount() {
-    debugger;
     if (/access_token|id_token|error/.test(this.props.location.hash)) {
       this.props.auth.handleAuthentication()
     } else {

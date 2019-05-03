@@ -8,6 +8,7 @@ export default class Auth {
             domain: process.env.REACT_APP_AUTH0_DOMAIN,
             clientID: process.env.REACT_APP_AUTH0_CLIENT_ID,
             redirectUrl: process.env.REACT_APP_AUTH0_CALLBACK_URL,
+            audience: process.env.REACT_APP_AUTH0_AUDIENCE,
             responseType: "token id_token",
             scope: "openid profile email"
         })
@@ -19,6 +20,7 @@ export default class Auth {
     handleAuthentication = () => {
         this.auth0.parseHash((err, authResult) => {
             if (authResult && authResult.accessToken && authResult.idToken) {
+
                 this.setSession(authResult);
                 this.history.push("/")
             } else if (err) {

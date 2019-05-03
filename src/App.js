@@ -1,7 +1,7 @@
 import React, { lazy, Component, Suspense } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import { Route, Switch, withRouter } from 'react-router-dom'
+import { Route, Switch, withRouter, Redirect } from 'react-router-dom'
 
 import PrivateRoute from "./PrivateRoute"
 import Nav from "./Nav"
@@ -26,12 +26,18 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <Suspense fallback={<div>Loading...</div>}>
             <Switch>
-              <Route path='/login'>
+              <Route path='/loginAuth0'>
                 <Auth0Login auth={this.auth} />
+              </Route>
+              <Route path='/login'>
+                <Login />
               </Route>
               <Route path="/callback" render={props =>
                 <Callback auth={this.auth} {...props} />}
               />
+              <Route path="/profile" render={props =>
+                this.auth.isAuthenticated() ? (<Profile auth={this.auth} {...props} />) : (<Redirect to="/login" />)} />
+              <PrivateRoute path="/profile" auth={this.auth} {...this.props} component={Profile} />
               <Route path='/add'>
                 <AddProduct />
               </Route>
@@ -44,7 +50,6 @@ class App extends Component {
               <Route path='/update'>
                 <UpdateProductList />
               </Route>
-              <PrivateRoute path="/profile" auth={this.auth} component={Profile} />
               <Route path='/'>
                 <Home />
               </Route>
