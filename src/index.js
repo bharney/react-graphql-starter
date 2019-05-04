@@ -18,7 +18,7 @@ const authLink = setContext((_, { headers }) => {
     return {
         headers: {
             ...headers,
-            authorization: "cjrwu5upt0002h8uee2unf24l",
+            authorization: localStorage.getItem("apiKey"),
         }
     }
 });

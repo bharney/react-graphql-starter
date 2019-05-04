@@ -3,7 +3,7 @@ import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
 import { Formik, Field } from 'formik';
 import { Redirect } from 'react-router-dom';
-
+import moment from "moment"
 class Login extends Component {
 
   render() {
@@ -26,10 +26,14 @@ class Login extends Component {
           <div>
             <Formik
               initialValues={{ email: '', password: '' }}
-              onSubmit={({ email, password }, { resetForm }) => {
-                login({ variables: { email, password } })
-                this.setState({ loggedIn: true })
+              onSubmit={async ({ email, password }, { resetForm }) => {
+                const { data: { login: { apiKey } } } = await login({ variables: { email, password } })
+                localStorage.setItem("apiKey", apiKey)
+                const expiresAt = JSON.stringify(moment().add(30).unix() * 1000 + new Date().getTime())
+                localStorage.setItem("expires_at", expiresAt)
+                this.setState({ authenticated: true })
                 resetForm()
+                this.props.history.push("/")
               }}>
               {props => {
                 const {

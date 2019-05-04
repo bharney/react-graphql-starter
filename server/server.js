@@ -15,6 +15,7 @@ import path from "path";
 getEnvironmentVariables()
 
 
+
 const start = async (connectionString, app) => {
   let opts = {}
   await mongoose.connect(
@@ -66,7 +67,6 @@ schema {
 
 // Initialize the express module and make it accessible via the app variable.
 const app = express()
-
 start(config.dbUrl, app)
 
 if (process.env.NODE_ENV == 'production') {

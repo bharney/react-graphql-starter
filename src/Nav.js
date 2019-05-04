@@ -33,17 +33,19 @@ class App extends Component {
           {isAuthenticated() &&
             <li key="profile">
               <NavLink to="/profile" >Profile</NavLink>
-            </li>
-          }
-          <li key="add">
-            <NavLink to="/add">Add</NavLink>
-          </li>
-          <li key="delete">
-            <NavLink to="/delete">Delete</NavLink>
-          </li>
-          <li key="update">
-            <NavLink to="/update">Update</NavLink>
-          </li>
+            </li>}
+          {isAuthenticated() &&
+            <li key="add">
+              <NavLink to="/add">Add</NavLink>
+            </li>}
+          {isAuthenticated() &&
+            <li key="delete">
+              <NavLink to="/delete">Delete</NavLink>
+            </li>}
+          {isAuthenticated() &&
+            <li key="update">
+              <NavLink to="/update">Update</NavLink>
+            </li>}
         </ul>
       </nav>
     );
