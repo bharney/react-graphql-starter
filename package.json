@@ -70,6 +70,7 @@
     "graphql-tools": "^4.0.3",
     "jwks-rsa": "^1.4.0",
     "lodash": "^4.17.11",
+    "moment": "^2.24.0",
     "mongoose": "^5.3.14",
     "prisma": "^1.26.6",
     "react": "^16.8.2",

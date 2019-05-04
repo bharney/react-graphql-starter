@@ -12,22 +12,7 @@ import { config as getEnvironmentVariables } from "dotenv"
 import express from "express";
 import cors from "cors";
 import path from "path";
-import jwt from "express-jwt"
-import jwksRsa from "jwks-rsa"
 getEnvironmentVariables()
-
-// var jwtCheck = jwt({
-//   secret: jwksRsa.expressJwtSecret({
-//     cache: true,
-//     rateLimit: true,
-//     jwksRequestsPerMinute: 5,
-//     jwksUri: `https://${process.env.REACT_APP_AUTH0_DOMAIN}/.well-known/jwks.json`
-//   }),
-//   audience: process.env.REACT_APP_AUTH0_AUDIENCE,
-//   issuer: `https://${process.env.REACT_APP_AUTH0_DOMAIN}/`,
-//   algorithms: ['RS256']
-// });
-
 
 
 
@@ -82,14 +67,8 @@ schema {
 
 // Initialize the express module and make it accessible via the app variable.
 const app = express()
-// app.use(jwtCheck);
 start(config.dbUrl, app)
 
-// app.get("/private", jwtCheck, function (req, res) {
-//   res.json({
-//     message: "hello world!"
-//   })
-// })
 if (process.env.NODE_ENV == 'production') {
   app.use(express.static(path.join(__dirname, '..', 'build')));
   app.get('/*', function (req, res) {
