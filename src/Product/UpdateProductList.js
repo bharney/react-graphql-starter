@@ -3,7 +3,7 @@ import { Mutation, Query } from 'react-apollo'
 import gql from 'graphql-tag'
 import { Formik, Field } from 'formik';
 import { withRouter } from 'react-router-dom';
-import Link from '../Link';
+import Link from './Link';
 const GET_PRODUCTS = gql`
 query {
   products 
