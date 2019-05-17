@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Mutation, Query } from 'react-apollo'
 import gql from 'graphql-tag'
 import { Formik, Field } from 'formik';
-import Link from '../Link';
+import Link from './Link';
 const PRODUCT_MUTATION = gql`
 mutation ProductMutation($id: ID!) {
     removeProduct(id: $id)
