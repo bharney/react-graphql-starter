@@ -9,7 +9,8 @@ import { createHttpLink } from 'apollo-link-http'
 import { InMemoryCache } from 'apollo-cache-inmemory'
 import { setContext } from 'apollo-link-context';
 import { BrowserRouter } from 'react-router-dom';
-
+import configureStore from "./store/configureStore"
+import { Provider } from 'react-redux'
 const httpLink = createHttpLink({
     uri: process.env.NODE_ENV == 'production' ? 'https://react-graphql-starter.azurewebsites.net/graphql' : 'http://localhost:4002/graphql'
 })
@@ -28,13 +29,16 @@ const client = new ApolloClient({
     cache: new InMemoryCache()
 })
 
+const store = configureStore()
 
 ReactDOM.render(
-    <BrowserRouter>
+    <Provider store={store}>
         <ApolloProvider client={client}>
-            <App />
+            <BrowserRouter>
+                <App />
+            </BrowserRouter>
         </ApolloProvider>
-    </BrowserRouter>,
+    </Provider>,
     document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change

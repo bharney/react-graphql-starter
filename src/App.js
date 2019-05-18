@@ -6,20 +6,18 @@ import './scripts/offcanvas'
 import logo from './logo.svg';
 import { Route, Switch, withRouter, Redirect } from 'react-router-dom'
 
-import PrivateRoute from "./Common/PrivateRoute"
-import Nav from "./Common/Nav"
-import Auth0 from './Auth/Auth0';
-import Auth from './Auth/Auth';
-import $ from 'jquery';
-const Home = lazy(() => import('./Home/Home'))
-const Login = lazy(() => import('./Account/Login'));
-const AddProduct = lazy(() => import('./Product/AddProduct'));
-const DeleteProduct = lazy(() => import('./Product/DeleteProduct'));
-const UpdateProductList = lazy(() => import('./Product/UpdateProductList'));
-const UpdateProduct = lazy(() => import('./Product/UpdateProduct'));
+
+import PrivateRoute from "./components/Common/PrivateRoute"
+import Nav from "./components/Common/Nav"
+import Auth from './components/Auth/Auth';
+const Home = lazy(() => import('./components/Home/Home'))
+const Login = lazy(() => import('./components/Account/Login'));
+const AddProduct = lazy(() => import('./components/Product/AddProduct'));
+const DeleteProduct = lazy(() => import('./components/Product/DeleteProduct'));
+const UpdateProductList = lazy(() => import('./components/Product/UpdateProductList'));
+const UpdateProduct = lazy(() => import('./components/Product/UpdateProduct'));
 
 class App extends Component {
-  auth0 = new Auth0(this.props.history);
   auth = new Auth(this.props.history);
 
   render() {
@@ -35,15 +33,15 @@ class App extends Component {
                     <Login {...this.props} />
                   </Route>
                   <Route path="/add" render={props =>
-                    this.auth.isAuthenticated() ? (<AddProduct auth={this.auth0} {...props} />) : (<Redirect to="/login" />)} />
+                    this.auth.isAuthenticated() ? (<AddProduct auth={this.auth} {...props} />) : (<Redirect to="/login" />)} />
                   <Route path="/delete" render={props =>
-                    this.auth.isAuthenticated() ? (<DeleteProduct auth={this.auth0} {...props} />) : (<Redirect to="/login" />)} />
+                    this.auth.isAuthenticated() ? (<DeleteProduct auth={this.auth} {...props} />) : (<Redirect to="/login" />)} />
                   <Route path="/update/:id" render={props =>
-                    this.auth.isAuthenticated() ? (<UpdateProduct auth={this.auth0} {...props} />) : (<Redirect to="/login" />)} />
+                    this.auth.isAuthenticated() ? (<UpdateProduct auth={this.auth} {...props} />) : (<Redirect to="/login" />)} />
                   <Route path="/update" render={props =>
-                    this.auth.isAuthenticated() ? (<UpdateProductList auth={this.auth0} {...props} />) : (<Redirect to="/login" />)} />
+                    this.auth.isAuthenticated() ? (<UpdateProductList auth={this.auth} {...props} />) : (<Redirect to="/login" />)} />
                   <Route path='/'>
-                    <Home />
+                    <Home {...this.props} />
                   </Route>
                 </Switch>
               </Suspense>
@@ -55,5 +53,4 @@ class App extends Component {
   }
 }
 
-
-export default withRouter(App);
+export default withRouter(App)
