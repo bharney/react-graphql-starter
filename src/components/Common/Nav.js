@@ -1,18 +1,19 @@
 import React, { lazy, Component, Suspense } from 'react';
 import { Route, Switch, NavLink } from 'react-router-dom'
-import $ from 'jquery';
-
+import ReactDOM from "react-dom"
 class Nav extends Component {
   onClick = () => {
-    $('.offcanvas-collapse').toggleClass('open')
+    let navbar = document.getElementsByClassName("offcanvas-collapse")
+    ReactDOM.findDOMNode(navbar[0]).classList.toggle('open');
   }
+
   render() {
     const { isAuthenticated, logout } = this.props.auth
     return (
       <nav className="navbar navbar-expand-md fixed-top navbar-dark bg-dark">
         <div className="container">
           <NavLink to="/" className="navbar-brand" activeClassName="active">React-GraphQL-Starter</NavLink>
-          <button className="navbar-toggler p-0 border-0" type="button" data-toggle="offcanvas">
+          <button className="navbar-toggler p-0 border-0" type="button" onClick={() => this.onClick()} data-toggle="offcanvas">
             <span className="navbar-toggler-icon"></span>
           </button>
           <div className="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
@@ -20,6 +21,11 @@ class Nav extends Component {
               {!isAuthenticated() &&
                 <li key="login" className="nav-item">
                   <NavLink to="/login" className="nav-link" activeClassName="active" onClick={() => this.onClick()}>Login</NavLink>
+                </li>
+              }
+              {!isAuthenticated() &&
+                <li key="register" className="nav-item">
+                  <NavLink to="/signup" className="nav-link" activeClassName="active" onClick={() => this.onClick()}>Register</NavLink>
                 </li>
               }
               {isAuthenticated() &&
@@ -33,6 +39,10 @@ class Nav extends Component {
               {isAuthenticated() &&
                 <li key="update" className="nav-item">
                   <NavLink to="/update" className="nav-link" activeClassName="active" onClick={() => this.onClick()}>Update</NavLink>
+                </li>}
+              {isAuthenticated() &&
+                <li key="logout" className="nav-item">
+                  <NavLink to="/login" className="nav-link" activeClassName="active" onClick={() => { this.onClick(); logout(); }}>Logout</NavLink>
                 </li>}
             </ul>
           </div>
