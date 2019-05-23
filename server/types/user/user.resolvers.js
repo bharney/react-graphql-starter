@@ -24,8 +24,8 @@ const signup = (_, args) => {
   const user = User.create({ ...args.input, apiKey: newApiKey() })
   const token = jwt.sign({ apiKey: user.apiKey }, config.secrets.jwt, { expiresIn: '30d' });
   return {
-    token,
-    user
+    user,
+    token
   };
 }
 

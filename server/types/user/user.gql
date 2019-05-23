@@ -32,7 +32,7 @@ input LoginUserInput {
 
 
 type Mutation {
-  signup(input: NewUserInput!): User!
+  signup(input: NewUserInput!): UserToken!
   updateMe(input: UpdateUserInput!): User!
   login(input: LoginUserInput!): UserToken!
 }

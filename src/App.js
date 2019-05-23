@@ -2,7 +2,8 @@ import React, { lazy, Component, Suspense } from 'react';
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.css';
 import './styles/offcanvas.css'
-import './scripts/offcanvas'
+import './styles/formInput.css'
+// import './scripts/offcanvas'
 import logo from './logo.svg';
 import { Route, Switch, withRouter, Redirect } from 'react-router-dom'
 
@@ -16,6 +17,7 @@ const AddProduct = lazy(() => import('./components/Product/AddProduct'));
 const DeleteProduct = lazy(() => import('./components/Product/DeleteProduct'));
 const UpdateProductList = lazy(() => import('./components/Product/UpdateProductList'));
 const UpdateProduct = lazy(() => import('./components/Product/UpdateProduct'));
+const Register = lazy(() => import('./components/Account/Register'));
 
 class App extends Component {
   auth = new Auth(this.props.history);
@@ -31,6 +33,9 @@ class App extends Component {
                 <Switch>
                   <Route path='/login'>
                     <Login {...this.props} />
+                  </Route>
+                  <Route path='/signup'>
+                    <Register {...this.props} />
                   </Route>
                   <Route path="/add" render={props =>
                     this.auth.isAuthenticated() ? (<AddProduct auth={this.auth} {...props} />) : (<Redirect to="/login" />)} />
