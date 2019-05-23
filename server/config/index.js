@@ -1,5 +1,6 @@
 import { merge } from 'lodash'
-
+import { config as getEnvironmentVariables } from "dotenv"
+getEnvironmentVariables()
 const env = process.env.NODE_ENV || 'development'
 
 const baseConfig = {
@@ -8,7 +9,7 @@ const baseConfig = {
   isTest: env === 'testing',
   port: process.env.port || 4002,
   secrets: {
-    jwt: process.env.JWT_SECRET,
+    jwt: process.env.REACT_APP_JWT_SECRET,
     jwtExp: '100d'
   }
 }

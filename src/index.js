@@ -19,7 +19,7 @@ const authLink = setContext((_, { headers }) => {
     return {
         headers: {
             ...headers,
-            authorization: localStorage.getItem("apiKey"),
+            authorization: localStorage.getItem("react-graphql-starter"),
         }
     }
 });

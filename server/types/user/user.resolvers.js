@@ -1,7 +1,8 @@
 import { User } from './user.model'
 import { AuthenticationError, ForbiddenError } from 'apollo-server'
 import { newApiKey } from '../../utils/auth'
-
+import jwt from "jsonwebtoken"
+import config from "../../config"
 const me = (_, args, ctx) => {
   if (!ctx.user) {
     throw new AuthenticationError()
@@ -13,7 +14,6 @@ const updateMe = (_, args, ctx) => {
   if (!ctx.user) {
     throw new AuthenticationError()
   }
-
   return User.findByIdAndUpdate(ctx.user._id, args.input, { new: true })
     .select('-password')
     .lean()
@@ -21,7 +21,12 @@ const updateMe = (_, args, ctx) => {
 }
 
 const signup = (_, args) => {
-  return User.create({ ...args.input, apiKey: newApiKey() })
+  const user = User.create({ ...args.input, apiKey: newApiKey() })
+  const token = jwt.sign({ apiKey: user.apiKey }, config.secrets.jwt, { expiresIn: '30d' });
+  return {
+    token,
+    user
+  };
 }
 
 const login = async (_, args, ctx) => {
@@ -38,7 +43,13 @@ const login = async (_, args, ctx) => {
   return user.checkPassword(args.input.password)
     .then(same => {
       if (same) {
-        return user;
+        const token = jwt.sign({ apiKey: user.apiKey },
+          config.secrets.jwt,
+          { expiresIn: '30d' });
+        return {
+          user,
+          token
+        };
       }
       return new AuthenticationError()
     })
