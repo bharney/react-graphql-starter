@@ -4,6 +4,7 @@ import gql from 'graphql-tag';
 import { Formik, Field } from 'formik';
 import { Redirect } from 'react-router-dom';
 import moment from "moment"
+import jwt from "jsonwebtoken"
 class Login extends Component {
 
   render() {
@@ -13,10 +14,13 @@ class Login extends Component {
         email: $email,
         password: $password
         }) {
-          _id
-          email
-          apiKey
-          role
+          user {
+            _id
+            email
+            apiKey
+            role
+          }
+          token
         }
     }`
 
@@ -27,11 +31,8 @@ class Login extends Component {
             <Formik
               initialValues={{ email: '', password: '' }}
               onSubmit={async ({ email, password }, { resetForm }) => {
-                const { data: { login: { apiKey } } } = await login({ variables: { email, password } })
-                localStorage.setItem("apiKey", apiKey)
-                const expiresAt = JSON.stringify(moment().add(30).unix() * 1000 + new Date().getTime())
-                localStorage.setItem("expires_at", expiresAt)
-                this.setState({ authenticated: true })
+                const { data: { login: { token } } } = await login({ variables: { email, password } })
+                localStorage.setItem("react-graphql-starter", token)
                 resetForm()
                 this.props.history.push("/")
               }}>

@@ -5,6 +5,11 @@ type User {
   role: String!
 }
 
+type UserToken {
+  user: User!
+  token: String!
+}
+
 type Query {
   me: User!
 }
@@ -29,5 +34,5 @@ input LoginUserInput {
 type Mutation {
   signup(input: NewUserInput!): User!
   updateMe(input: UpdateUserInput!): User!
-  login(input: LoginUserInput!): User!
+  login(input: LoginUserInput!): UserToken!
 }
