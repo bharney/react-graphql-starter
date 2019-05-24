@@ -10,9 +10,10 @@ body {
 @media (max-width: 767.98px) {
   .offcanvas-collapse {
     position: fixed;
-    top: 56px; /* Height of navbar */
+    top: 52px; /* Height of navbar */
     bottom: 0;
     width: 100%;
+    padding-top: 4px;
     padding-right: 1rem;
     padding-left: 1rem;
     overflow-y: auto;
