@@ -1,7 +1,7 @@
 import React, { lazy, Component, Suspense } from 'react';
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.css';
-import './styles/offcanvas.css'
+import './styles/offcanvas.scss'
 import './styles/formInput.scss'
 import './styles/App.scss'
 import logo from './logo.svg';
@@ -12,6 +12,7 @@ import PrivateRoute from "./components/Common/PrivateRoute"
 import Nav from "./components/Common/Nav"
 import Auth from './components/Auth/Auth';
 import NavProvider from "./context/NavProvider"
+import Loading from "./components/Common/Loading"
 const Home = lazy(() => import('./components/Home/Home'))
 const Login = lazy(() => import('./components/Account/Login'));
 const AddProduct = lazy(() => import('./components/Product/AddProduct'));
@@ -30,7 +31,7 @@ class App extends Component {
           <main className="container">
             <div className="row">
               <div className="col">
-                <Suspense fallback={<div>Loading...</div>}>
+                <Suspense fallback={<Loading />}>
                   <Switch>
                     <Route path='/login'>
                       <Login {...this.props} />

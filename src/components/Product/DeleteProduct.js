@@ -3,6 +3,8 @@ import { Mutation, Query } from 'react-apollo'
 import gql from 'graphql-tag'
 import { Formik, Field } from 'formik';
 import Link from './Link';
+import Loading from "../Common/Loading"
+
 const PRODUCT_MUTATION = gql`
 mutation ProductMutation($id: ID!) {
     removeProduct(id: $id)
@@ -44,7 +46,7 @@ class DeleteProduct extends Component {
           <div>
             <Query query={GET_PRODUCTS}>
               {({ loading, error, data }) => {
-                if (loading) return <div>Fetching...</div>
+                if (loading) return <Loading />
                 if (error) return <div>Error</div>
 
                 const linksToRender = data.products

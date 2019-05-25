@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Link from './Link'
 import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
+import Loading from "../Common/Loading"
 
 const FEED_QUERY = gql`
   {
@@ -25,7 +26,7 @@ class ProductList extends Component {
         return (
             <Query query={FEED_QUERY}>
                 {({ loading, error, data }) => {
-                    if (loading) return <div>Fetching...</div>
+                    if (loading) return <Loading />
                     if (error) return <div>Error</div>
 
                     const linksToRender = data.products
