@@ -37,21 +37,9 @@ class Nav extends Component {
           <nav id="custom-nav" className="navbar navbar-expand-md fixed-top navbar-dark bg-dark">
             <div className="container">
               <NavLink to="/" className="navbar-brand" onClick={onUpdate} activeClassName="active">React-GraphQL-Starter</NavLink>
-              <button className="navbar-toggler p-0 border-0" type="button" onClick={toggle} data-toggle="offcanvas">
-                <span className="navbar-toggler-icon"></span>
-              </button>
+
               <div onClick={(e) => handleOverlayToggle(e)} className="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
-                <ul className="navbar-nav ml-auto">
-                  {!isAuthenticated() &&
-                    <li key="login" className="nav-item">
-                      <NavLink to="/login" className="nav-link" activeClassName="active" onClick={onUpdate}>Login</NavLink>
-                    </li>
-                  }
-                  {!isAuthenticated() &&
-                    <li key="register" className="nav-item">
-                      <NavLink to="/signup" className="nav-link" activeClassName="active" onClick={onUpdate}>Register</NavLink>
-                    </li>
-                  }
+                <ul className="navbar-nav mr-auto">
                   {isAuthenticated() &&
                     <li key="add" className="nav-item">
                       <NavLink to="/add" className="nav-link" activeClassName="active" onClick={onUpdate}>Add</NavLink>
@@ -64,17 +52,49 @@ class Nav extends Component {
                     <li key="update" className="nav-item">
                       <NavLink to="/update" className="nav-link" activeClassName="active" onClick={onUpdate}>Update</NavLink>
                     </li>}
+                  {!isAuthenticated() &&
+                    <li key="login" className="nav-item d-md-none d-lg-none d-xl-none">
+                      <NavLink to="/login" className="nav-link" activeClassName="active" onClick={onUpdate}>Login</NavLink>
+                    </li>
+                  }
+                  {!isAuthenticated() &&
+                    <li key="register" className="nav-item d-md-none d-lg-none d-xl-none">
+                      <NavLink to="/signup" className="nav-link" activeClassName="active" onClick={onUpdate}>Register</NavLink>
+                    </li>
+                  }
+                  {isAuthenticated() &&
+                    <li key="logout" className="nav-item d-md-none d-lg-none d-xl-none">
+                      <NavLink to="/login" className="nav-link" activeClassName="active" onClick={() => { onUpdate(); logout(); }}>Logout</NavLink>
+                    </li>}
+                </ul>
+              </div>
+              <div className="d-none d-md-block d-lg-block d-xl-block">
+                <ul className="navbar-nav">
+                  {!isAuthenticated() &&
+                    <li key="login" className="nav-item">
+                      <NavLink to="/login" className="nav-link" activeClassName="active" onClick={onUpdate}>Login</NavLink>
+                    </li>
+                  }
+                  {!isAuthenticated() &&
+                    <li key="register" className="nav-item">
+                      <NavLink to="/signup" className="nav-link" activeClassName="active" onClick={onUpdate}>Register</NavLink>
+                    </li>
+                  }
                   {isAuthenticated() &&
                     <li key="logout" className="nav-item">
                       <NavLink to="/login" className="nav-link" activeClassName="active" onClick={() => { onUpdate(); logout(); }}>Logout</NavLink>
                     </li>}
                 </ul>
               </div>
+              <button className="navbar-toggler p-0 border-0" type="button" onClick={toggle} data-toggle="offcanvas">
+                <span className="navbar-toggler-icon"></span>
+              </button>
             </div>
           </nav>
         )
-      }}
-    </NavContext.Consumer>
+      }
+      }
+    </NavContext.Consumer >
     );
   }
 }

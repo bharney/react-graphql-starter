@@ -8,7 +8,7 @@ import {
   fetchPostsIfNeeded,
   invalidateSubreddit
 } from '../../store/actions'
-
+import Loading from "../Common/Loading"
 class Home extends Component {
   componentDidMount() {
     const { dispatch, selectedSubreddit } = this.props
@@ -55,7 +55,7 @@ class Home extends Component {
             <button onClick={this.handleRefreshClick}>Refresh</button>
           )}
         </p>
-        {isFetching && posts.length === 0 && <h2>Loading...</h2>}
+        {isFetching && posts.length === 0 && <Loading />}
         {!isFetching && posts.length === 0 && <h2>Empty.</h2>}
         {posts.length > 0 && (
           <div style={{ opacity: isFetching ? 0.5 : 1 }}>

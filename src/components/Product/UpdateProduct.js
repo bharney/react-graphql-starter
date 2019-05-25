@@ -4,6 +4,7 @@ import gql from 'graphql-tag'
 import { Formik, Field } from 'formik';
 import ProductList from './ProductList';
 import { withRouter } from 'react-router-dom';
+import Loading from "../Common/Loading"
 
 const PRODUCT_MUTATION = gql`
 mutation ProductMutation(
@@ -62,7 +63,7 @@ class UpdateProduct extends Component {
           <div>
             <Query query={GET_PRODUCT} variables={{ id }}>
               {({ loading, error, data }) => {
-                if (loading) return <div>Fetching...</div>
+                if (loading) return <Loading />
                 if (error) return <div>Error</div>
                 const { name, price, image, description, range } = data.product;
                 return (

@@ -4,6 +4,8 @@ import gql from 'graphql-tag'
 import { Formik, Field } from 'formik';
 import { withRouter } from 'react-router-dom';
 import Link from './Link';
+import Loading from "../Common/Loading"
+
 const GET_PRODUCTS = gql`
 query {
   products 
@@ -26,7 +28,7 @@ class UpdateProductList extends Component {
       <div>
         <Query query={GET_PRODUCTS}>
           {({ loading, error, data }) => {
-            if (loading) return <div>Fetching...</div>
+            if (loading) return <Loading />
             if (error) return <div>Error</div>
 
             const linksToRender = data.products
