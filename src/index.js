@@ -12,7 +12,7 @@ import { BrowserRouter } from 'react-router-dom';
 import configureStore from "./store/configureStore"
 import { Provider } from 'react-redux'
 const httpLink = createHttpLink({
-    uri: process.env.NODE_ENV == 'production' ? 'https://react-graphql-starter.azurewebsites.net/graphql' : 'http://localhost:4002/graphql'
+    uri: process.env.NODE_ENV === 'production' ? 'https://react-graphql-starter.azurewebsites.net/graphql' : 'http://localhost:4002/graphql'
 })
 
 const authLink = setContext((_, { headers }) => {

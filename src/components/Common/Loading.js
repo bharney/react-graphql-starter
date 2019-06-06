@@ -10,7 +10,7 @@ class Loading extends Component {
                 size="1x"
                 style={{
                     position: "absolute",
-                    top: "7vh",
+                    top: "8vh",
                     left: "50%",
                     fontSize: "45px"
                 }}

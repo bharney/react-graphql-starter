@@ -86,6 +86,7 @@
     "react-apollo": "^2.4.1",
     "react-dom": "^16.8.2",
     "react-redux": "^7.0.3",
+    "react-toast-notifications": "^1.4.0",
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0",
     "save-dev": "^2.0.0",

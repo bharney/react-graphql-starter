@@ -27,7 +27,6 @@ function requestPosts(subreddit) {
 }
 
 function receivePosts(subreddit, json) {
-    debugger;
     return {
         type: RECEIVE_POSTS,
         subreddit,
@@ -41,7 +40,6 @@ function fetchPosts(subreddit) {
         dispatch(requestPosts(subreddit))
         return axios.get(`https://www.reddit.com/r/${subreddit}.json`)
             .then(response => {
-                debugger;
                 return response.data;
             })
             .then(json => dispatch(receivePosts(subreddit, json)))
@@ -49,7 +47,6 @@ function fetchPosts(subreddit) {
 }
 
 function shouldFetchPosts(state, subreddit) {
-    debugger;
     const posts = state.postsBySubreddit[subreddit]
     if (!posts) {
         return true
