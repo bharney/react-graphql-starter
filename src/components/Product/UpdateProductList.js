@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { Mutation, Query } from 'react-apollo'
+import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
-import { Formik, Field } from 'formik';
 import { withRouter } from 'react-router-dom';
 import Link from './Link';
 import Loading from "../Common/Loading"
@@ -25,7 +24,8 @@ query {
 class UpdateProductList extends Component {
   render() {
     return (
-      <div>
+      <div className="col">
+        <h2 className="text-center display-4">Update.</h2>
         <Query query={GET_PRODUCTS}>
           {({ loading, error, data }) => {
             if (loading) return <Loading />

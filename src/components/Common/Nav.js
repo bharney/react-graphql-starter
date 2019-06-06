@@ -1,5 +1,5 @@
-import React, { lazy, Component, Suspense } from 'react';
-import { Route, Switch, NavLink } from 'react-router-dom'
+import React, { Component } from 'react';
+import { NavLink } from 'react-router-dom'
 import ReactDOM from "react-dom"
 import "../../styles/Nav.scss"
 import { NavContext } from "../../context/NavProvider";

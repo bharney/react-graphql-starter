@@ -38,8 +38,9 @@ class Home extends Component {
   render() {
     const { selectedSubreddit, posts, isFetching, lastUpdated } = this.props;
     return (
-      <div>Home
-      <ProductList />
+      <div className="col">
+        <h2 className="text-center display-4">Home.</h2>
+        <ProductList />
         <Picker
           value={selectedSubreddit}
           onChange={this.handleChange}
