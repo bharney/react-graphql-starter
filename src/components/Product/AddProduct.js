@@ -57,7 +57,6 @@ class AddProduct extends Component {
           refetchQueries={[{ query: GET_PRODUCTS }]}>
           {(newProduct) => (
             <div>
-              <ProductList />
               <Formik
                 initialValues={{ name: '', price: '', image: '', type: '', description: '', range: '' }}
                 onSubmit={({ name, price, image, type, description, range }, { resetForm }) => {
@@ -77,31 +76,26 @@ class AddProduct extends Component {
                     handleReset,
                   } = props;
                   return (
-
                     <form onSubmit={handleSubmit}>
-                      <div>
+                      <div className="form-group">
                         <label>Name:</label>
-                        <Field name="name" value={values.name} required type="text" />
+                        <Field className="form-control" name="name" value={values.name} required type="text" />
                       </div>
-                      <div>
+                      <div className="form-group">
                         <label>Price:</label>
-                        <Field name="price" value={values.price} required type="number" />
+                        <Field className="form-control" name="price" value={values.price} required type="number" />
                       </div>
-                      <div>
-                        <label>Image:</label>
-                        <Field name="image" value={values.image} required type="text" />
+                      <div className="form-group">
+                        <label>Image Url:</label>
+                        <Field className="form-control" name="image" value={values.image} required type="text" />
                       </div>
-                      <div>
-                        <label>Type:</label>
-                        <Field name="type" value={values.type} required type="text" />
-                      </div>
-                      <div>
+                      <div className="form-group">
                         <label>Description:</label>
-                        <Field name="description" value={values.description} required type="text" />
+                        <Field className="form-control" name="description" value={values.description} required type="text" />
                       </div>
-                      <div>
+                      <div className="form-group">
                         <label>Range:</label>
-                        <Field name="range" value={values.range} required type="text" />
+                        <Field className="form-control" name="range" value={values.range} required type="text" />
                       </div>
                       <button type="submit">Submit</button>
                     </form>

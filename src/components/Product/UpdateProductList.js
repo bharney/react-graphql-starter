@@ -34,22 +34,25 @@ class UpdateProductList extends Component {
             const linksToRender = data.products
 
             return (
-              <ul>
+              <div className="card-columns">
                 {linksToRender.map(product => (
-                  <div>
-                    <Link key={product.name} link={product} />
-                    <button name={product._id} onClick={(event) => {
-                      debugger;
-                      console.log(event)
-                      const name = event.currentTarget.name;
-                      this.props.history.push({
-                        pathname: '/update/' + product._id
-                      })
-                    }}>Update</button>
+                  <div key={product.name} className="card">
+                    <img className="card-img-top" src={product.image} alt="Card image cap" />
+                    <div className="card-body">
+                      <h5 className="card-title">{product._id} - {product.name}</h5>
+                      <p className="card-text">{product.description}</p>
+                    </div>
+                    <div className="card-footer">
+                      <button name={product._id} className="btn btn-block btn-success" onClick={(event) => {
+                        this.props.history.push({
+                          pathname: '/update/' + product._id
+                        })
+                      }}>Update</button>
+                    </div>
                   </div>
                 )
                 )}
-              </ul>
+              </div>
             )
           }}
         </Query>

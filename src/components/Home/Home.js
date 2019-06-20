@@ -12,7 +12,6 @@ import Loading from "../Common/Loading"
 class Home extends Component {
   componentDidMount() {
     const { dispatch, selectedSubreddit } = this.props
-    debugger;
     dispatch(fetchPostsIfNeeded(selectedSubreddit))
   }
 

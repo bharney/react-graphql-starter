@@ -75,7 +75,6 @@ class NotificationProvider extends Component {
       display: "block"
     }
     const closeAction = (e) => { e.preventDefault(); this.closeAlert(); };
-    debugger;
     return (
       <div className={`toast toast-${type} alert alert-dismissable fade fade-${alertstate}`} style={styles} role="alert">
         <a href="#" className="close" aria-label="close" onClick={closeAction}>&times;</a>
