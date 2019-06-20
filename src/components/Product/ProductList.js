@@ -32,9 +32,9 @@ class ProductList extends Component {
                     const linksToRender = data.products
 
                     return (
-                        <ul>
+                        <div className="card-columns">
                             {linksToRender.map(link => <Link key={link.name} link={link} />)}
-                        </ul>
+                        </div>
                     )
                 }}
             </Query>

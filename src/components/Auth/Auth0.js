@@ -20,7 +20,6 @@ export default class Auth0 {
     handleAuthentication = () => {
         this.auth0.parseHash((err, authResult) => {
             if (authResult && authResult.accessToken && authResult.idToken) {
-                debugger;
                 this.setSession(authResult);
                 this.history.push("/")
             } else if (err) {
