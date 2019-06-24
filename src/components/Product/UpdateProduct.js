@@ -14,7 +14,9 @@ mutation ProductMutation(
   $price: Float!,
   $image: String!,
   $description: String!,
-  $range: String!) {
+  $range: String!,
+  $liquidCooled: Boolean!,
+  $bikeType: BikeType!) {
   updateProduct(id: $id,
   input:{
     name: $name
@@ -22,6 +24,8 @@ mutation ProductMutation(
     image: $image
     description: $description
     range: $range
+    liquidCooled: $liquidCooled
+    bikeType: $bikeType
  })
   {
     _id
@@ -29,6 +33,7 @@ mutation ProductMutation(
     price
     image
     description
+    type,
     createdBy{
       _id
     }
@@ -42,6 +47,7 @@ query ProductQuery($id: ID!) {
     price
     image
     description
+    type,
     createdBy{
       _id
     }
@@ -51,8 +57,6 @@ query ProductQuery($id: ID!) {
 class UpdateProduct extends Component {
   render() {
     const { id } = this.props.match.params
-    console.log(id);
-    debugger;
     return (
       <NotificationContext.Consumer>
         {({ openAlert }) => (
@@ -70,12 +74,12 @@ class UpdateProduct extends Component {
                     {({ loading, error, data }) => {
                       if (loading) return <Loading />
                       if (error) return <div>Error</div>
-                      const { name, price, image, description, range } = data.product;
+                      const { name, price, type, image, description, range, bikeType, liquidCooled } = data.product;
                       return (
                         <Formik
-                          initialValues={{ name, price, image, description, range }}
-                          onSubmit={({ name, price, image, description, range }) => {
-                            updateProduct({ variables: { id, name, price, image, description, range } })
+                          initialValues={{ name, price, type, image, description, range, bikeType, liquidCooled }}
+                          onSubmit={({ name, price, type, image, description, range, bikeType, liquidCooled }) => {
+                            updateProduct({ variables: { id, name, price, type, image, description, range, bikeType, liquidCooled } })
                             openAlert("Updated successfully!", alertTypes.success)
                             this.props.history.push('/update')
                           }}>
@@ -102,6 +106,21 @@ class UpdateProduct extends Component {
                                   <Field className="form-control" name="price" value={values.price} required type="number" />
                                 </div>
                                 <div className="form-group">
+                                  <label>Type:</label>
+                                  <select
+                                    name="type"
+                                    value={values.type}
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    style={{ display: 'block' }}
+                                  >
+                                    <option value="" label="Select Product Type" />
+                                    <option value="DRONE" label="Drone" />
+                                    <option value="GAMING_PC" label="Gaming PC" />
+                                    <option value="BIKE" label="Bike" />
+                                  </select>
+                                </div>
+                                <div className="form-group">
                                   <label>Image Url:</label>
                                   <Field className="form-control" name="image" value={values.image} required type="text" />
                                 </div>
@@ -109,10 +128,32 @@ class UpdateProduct extends Component {
                                   <label>Description:</label>
                                   <Field className="form-control" name="description" value={values.description} required type="text" />
                                 </div>
-                                <div className="form-group">
+                                {values.type == "DRONE" && <div className="form-group">
                                   <label>Range:</label>
                                   <Field className="form-control" name="range" value={values.range} required type="text" />
-                                </div>
+                                </div>}
+                                {values.type == "GAMING_PC" && <div className="form-group">
+                                  <div className="form-check">
+                                    <Field className="form-check-input" id="liquidCooled" name="liquidCooled" value={values.liquidCooled} required type="checkbox" />
+                                    <label className="form-check-label" htmlFor="liquidCooled">Liquid Cooled</label>
+                                  </div>
+                                </div>}
+                                {values.type == "BIKE" && <div className="form-group">
+                                  <label>Bike Type:</label>
+                                  <select
+                                    name="bikeType"
+                                    value={values.bikeType}
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    style={{ display: 'block' }}
+                                  >
+                                    <option value="" label="Select Bike Type" />
+                                    <option value="KIDS" label="Kids" />
+                                    <option value="MOUNTAIN" label="Mountain" />
+                                    <option value="ELECTRIC" label="Electric" />
+                                    <option value="BEACH" label="Beach" />
+                                  </select>
+                                </div>}
                                 <button type="submit">Submit</button>
                               </form>
                             );
