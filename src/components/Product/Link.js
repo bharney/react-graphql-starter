@@ -6,7 +6,7 @@ class Link extends Component {
             <div className="card">
                 <img className="card-img-top" src={this.props.link.image} alt="Card image cap" />
                 <div className="card-body">
-                    <h5 className="card-title">{this.props.link._id} - {this.props.link.name}</h5>
+                    <h5 className="card-title">{this.props.link.name}</h5>
                     <p className="card-text">{this.props.link.description}</p>
                 </div>
             </div>

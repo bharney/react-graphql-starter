@@ -39,7 +39,7 @@ class UpdateProductList extends Component {
                   <div key={product.name} className="card">
                     <img className="card-img-top" src={product.image} alt="Card image cap" />
                     <div className="card-body">
-                      <h5 className="card-title">{product._id} - {product.name}</h5>
+                      <h5 className="card-title">{product.name}</h5>
                       <p className="card-text">{product.description}</p>
                     </div>
                     <div className="card-footer">
