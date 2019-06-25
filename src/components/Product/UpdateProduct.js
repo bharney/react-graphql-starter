@@ -34,6 +34,15 @@ mutation ProductMutation(
     image
     description
     type,
+    ... on Bike {
+      bikeType
+    }
+    ... on Drone {
+      range
+    }
+    ... on GamingPc {
+      liquidCooled
+    }
     createdBy{
       _id
     }
@@ -48,6 +57,15 @@ query ProductQuery($id: ID!) {
     image
     description
     type,
+    ... on Bike {
+      bikeType
+    }
+    ... on Drone {
+      range
+    }
+    ... on GamingPc {
+      liquidCooled
+    }
     createdBy{
       _id
     }
@@ -79,6 +97,16 @@ class UpdateProduct extends Component {
                         <Formik
                           initialValues={{ name, price, type, image, description, range, bikeType, liquidCooled }}
                           onSubmit={({ name, price, type, image, description, range, bikeType, liquidCooled }) => {
+                            debugger;
+                            if (!range) {
+                              range = ""
+                            }
+                            if (!bikeType) {
+                              bikeType = "MOUNTAIN"
+                            }
+                            if (!liquidCooled) {
+                              liquidCooled = false;
+                            }
                             updateProduct({ variables: { id, name, price, type, image, description, range, bikeType, liquidCooled } })
                             openAlert("Updated successfully!", alertTypes.success)
                             this.props.history.push('/update')
@@ -95,6 +123,7 @@ class UpdateProduct extends Component {
                               handleSubmit,
                               handleReset,
                             } = props;
+                            debugger;
                             return (
                               <form onSubmit={handleSubmit}>
                                 <div className="form-group">
@@ -112,7 +141,7 @@ class UpdateProduct extends Component {
                                     value={values.type}
                                     onChange={handleChange}
                                     onBlur={handleBlur}
-                                    style={{ display: 'block' }}
+                                    className="form-control"
                                   >
                                     <option value="" label="Select Product Type" />
                                     <option value="DRONE" label="Drone" />
@@ -134,7 +163,7 @@ class UpdateProduct extends Component {
                                 </div>}
                                 {values.type == "GAMING_PC" && <div className="form-group">
                                   <div className="form-check">
-                                    <Field className="form-check-input" id="liquidCooled" name="liquidCooled" value={values.liquidCooled} required type="checkbox" />
+                                    <Field className="form-check-input" id="liquidCooled" name="liquidCooled" checked={values.liquidCooled} value={values.liquidCooled} type="checkbox" />
                                     <label className="form-check-label" htmlFor="liquidCooled">Liquid Cooled</label>
                                   </div>
                                 </div>}
@@ -145,7 +174,7 @@ class UpdateProduct extends Component {
                                     value={values.bikeType}
                                     onChange={handleChange}
                                     onBlur={handleBlur}
-                                    style={{ display: 'block' }}
+                                    className="form-control"
                                   >
                                     <option value="" label="Select Bike Type" />
                                     <option value="KIDS" label="Kids" />

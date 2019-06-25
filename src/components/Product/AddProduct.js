@@ -100,7 +100,7 @@ class AddProduct extends Component {
                               value={values.type}
                               onChange={handleChange}
                               onBlur={handleBlur}
-                              style={{ display: 'block' }}
+                              className="form-control"
                             >
                               <option value="" label="Select Product Type" />
                               <option value="DRONE" label="Drone" />
@@ -133,7 +133,7 @@ class AddProduct extends Component {
                               value={values.bikeType}
                               onChange={handleChange}
                               onBlur={handleBlur}
-                              style={{ display: 'block' }}
+                              className="form-control"
                             >
                               <option value="" label="Select Bike Type" />
                               <option value="KIDS" label="Kids" />
