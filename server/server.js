@@ -8,11 +8,9 @@ import product from './types/product/product.resolvers'
 import coupon from './types/coupon/coupon.resolvers'
 import user from './types/user/user.resolvers'
 import mongoose from 'mongoose'
-import { config as getEnvironmentVariables } from "dotenv"
 import express from "express";
 import cors from "cors";
 import path from "path";
-getEnvironmentVariables()
 
 
 

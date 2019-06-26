@@ -6,7 +6,7 @@
     "start": "run-p watch:server start:client",
     "start:client": "react-scripts start",
     "start:server": "node dist/server.js",
-    "start:server-prod": "SET NODE_ENV=production node dist/server.js",
+    "start:server-prod": "NODE_ENV=production node dist/server.js",
     "watch:server": "nodemon --exec npm run restart",
     "build": "react-scripts build",
     "build:babel": "babel server --out-dir dist",
