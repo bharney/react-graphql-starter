@@ -20,9 +20,9 @@ const updateMe = (_, args, ctx) => {
     .exec()
 }
 
-const signup = (_, args) => {
-  const user = User.create({ ...args.input, apiKey: newApiKey() })
-  const token = jwt.sign({ apiKey: user.apiKey }, config.secrets.jwt, { expiresIn: '30d' });
+const signup = async (_, args) => {
+  const user = await User.create({ ...args.input, apiKey: newApiKey() })
+  const token = jwt.sign({ apiKey: user.apiKey }, config.secrets.jwt, { expiresIn: config.secrets.jwtExp });
   return {
     user,
     token

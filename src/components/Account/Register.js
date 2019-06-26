@@ -39,6 +39,7 @@ class Login extends Component {
                           localStorage.setItem("react-graphql-starter", token)
                           resetForm()
                           this.props.history.push("/")
+                          openAlert("Registered Successfully!", alertTypes.success);
                         } else {
                           openAlert("Password and Confirmation Password do not match. Please retype password fields.", alertTypes.danger);
                         }
