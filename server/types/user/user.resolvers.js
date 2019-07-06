@@ -45,7 +45,7 @@ const login = async (_, args, ctx) => {
       if (same) {
         const token = jwt.sign({ apiKey: user.apiKey },
           config.secrets.jwt,
-          { expiresIn: '30d' });
+          { expiresIn: config.secrets.jwtExp });
         return {
           user,
           token

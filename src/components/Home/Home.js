@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import ProductList from '../Product/ProductList';
-import Posts from './Posts'
 import Picker from './Picker'
 import { connect } from 'react-redux'
 import {
@@ -37,31 +35,53 @@ class Home extends Component {
   render() {
     const { selectedSubreddit, posts, isFetching, lastUpdated } = this.props;
     return (
-      <div className="col">
-        <h2 className="text-center display-4">Home.</h2>
-        <ProductList />
-        <Picker
-          value={selectedSubreddit}
-          onChange={this.handleChange}
-          options={['reactjs', 'frontend']}
-        />
-        <p>
-          {lastUpdated && (
-            <span>
-              Last updated at {new Date(lastUpdated).toLocaleTimeString()}.{' '}
-            </span>
-          )}
-          {!isFetching && (
-            <button onClick={this.handleRefreshClick}>Refresh</button>
-          )}
-        </p>
-        {isFetching && posts.length === 0 && <Loading />}
-        {!isFetching && posts.length === 0 && <h2>Empty.</h2>}
-        {posts.length > 0 && (
-          <div style={{ opacity: isFetching ? 0.5 : 1 }}>
-            <Posts posts={posts} />
+      <div role="main">
+        <div className="jumbotron">
+          <div className="container">
+            <h1 className="display-3">Home.</h1>
+            <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
+            <p><a className="btn btn-primary btn-lg" href="#" role="button">Learn more »</a></p>
           </div>
-        )}
+        </div>
+        <div className="container">
+          <div className="row">
+            <div className="col col-md-6">
+              <Picker
+                value={selectedSubreddit}
+                onChange={this.handleChange}
+                options={['reactjs', 'frontend']}
+              />
+            </div>
+            <div className="col col-md-6 text-right">
+              <p>
+                {lastUpdated && (
+                  <span>
+                    Last updated at {new Date(lastUpdated).toLocaleTimeString()}.{' '}
+                  </span>
+                )}
+                {!isFetching && (
+                  <button className="btn btn-primary" onClick={this.handleRefreshClick}>Refresh</button>
+                )}
+              </p>
+            </div>
+            <div className="col">
+              {isFetching && posts.length === 0 && <Loading />}
+              {!isFetching && posts.length === 0 && <h2>Empty.</h2>}
+              {posts.length > 0 && (
+                <div className="card-columns">
+                  {posts.map((post, i) => (
+                    <div className="card" style={{ opacity: isFetching ? 0.5 : 1 }}>
+                      <div className="card-body">
+                        <p key={i}>{post.title}</p>
+                        <p><a className="btn btn-secondary" href={post.url} role="button">View details »</a></p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
