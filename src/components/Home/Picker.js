@@ -5,16 +5,16 @@ export default class Picker extends Component {
         const { value, onChange, options } = this.props
 
         return (
-            <span>
+            <div className="form-group">
                 <h1>{value}</h1>
-                <select onChange={e => onChange(e.target.value)} value={value}>
+                <select onChange={e => onChange(e.target.value)} value={value} className="form-control">
                     {options.map(option => (
                         <option value={option} key={option}>
                             {option}
                         </option>
                     ))}
                 </select>
-            </span>
+            </div>
         )
     }
 }
