@@ -35,11 +35,16 @@ class Login extends Component {
                     <Formik
                       initialValues={{ email: '', password: '' }}
                       onSubmit={async ({ email, password }, { resetForm }) => {
-                        const { data: { login: { token } } } = await login({ variables: { email, password } })
-                        localStorage.setItem("react-graphql-starter", token)
-                        openAlert("logged in successfully!", alertTypes.success);
-                        resetForm()
-                        this.props.history.push("/")
+                        try {
+                          const { data: { login: { token } } } = await login({ variables: { email, password } })
+                          localStorage.setItem("react-graphql-starter", token)
+                          openAlert("logged in successfully!", alertTypes.success);
+                          resetForm()
+                          this.props.history.push("/")
+                        } catch (error) {
+                          resetForm()
+                          openAlert("Incorrect login or password", alertTypes.danger);
+                        }
                       }}>
                       {props => {
                         const {
