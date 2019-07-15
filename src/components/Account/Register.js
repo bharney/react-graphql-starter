@@ -35,11 +35,16 @@ class Login extends Component {
                       initialValues={{ email: '', password: '', confirmPassword: '' }}
                       onSubmit={async ({ email, password, confirmPassword }, { resetForm }) => {
                         if (password === confirmPassword) {
-                          const { data: { signup: { token } } } = await signup({ variables: { email, password } })
-                          localStorage.setItem("react-graphql-starter", token)
-                          resetForm()
-                          this.props.history.push("/")
-                          openAlert("Registered Successfully!", alertTypes.success);
+                          try {
+                            const { data: { signup: { token } } } = await signup({ variables: { email, password } })
+                            localStorage.setItem("react-graphql-starter", token)
+                            resetForm()
+                            this.props.history.push("/")
+                            openAlert("Registered Successfully!", alertTypes.success);
+                          } catch (error) {
+                            resetForm()
+                            openAlert("An error occured while trying to register.", alertTypes.danger)
+                          }
                         } else {
                           openAlert("Password and Confirmation Password do not match. Please retype password fields.", alertTypes.danger);
                         }
