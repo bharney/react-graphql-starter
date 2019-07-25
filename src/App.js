@@ -1,14 +1,12 @@
 
 import React, { lazy, Component, Suspense } from 'react';
 import 'bootstrap';
-import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/scss/bootstrap.scss';
 import './styles/offcanvas.scss'
 import './styles/formInput.scss'
 import './styles/App.scss'
 import "./styles/toastr.scss"
-import logo from './logo.svg';
 import { Route, Switch, withRouter, Redirect } from 'react-router-dom'
-import ReactDOM from "react-dom"
 import PrivateRoute from "./components/Common/PrivateRoute"
 import Nav from "./components/Common/Nav"
 import Auth from './components/Auth/Auth';
