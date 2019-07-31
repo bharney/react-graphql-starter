@@ -70,7 +70,7 @@ class AddProduct extends Component {
                         newProduct({ variables: { name, price, image, type, description, range, liquidCooled, bikeType } })
                         resetForm()
                         openAlert("Added Product Successfully!", alertTypes.success);
-                        this.props.history.push("/")
+                        this.props.history.push("/update")
                       }}>
                       {props => {
                         const {
@@ -123,7 +123,7 @@ class AddProduct extends Component {
                             </div>}
                             {values.type == "GAMING_PC" && <div className="form-group">
                               <div className="form-check">
-                                <Field className="form-check-input" id="liquidCooled" name="liquidCooled" value={values.liquidCooled} required type="checkbox" />
+                                <Field className="form-check-input" id="liquidCooled" name="liquidCooled" value={values.liquidCooled} type="checkbox" />
                                 <label className="form-check-label" htmlFor="liquidCooled">Liquid Cooled</label>
                               </div>
                             </div>}
