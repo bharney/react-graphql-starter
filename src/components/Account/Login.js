@@ -49,14 +49,9 @@ class Login extends Component {
                       {props => {
                         const {
                           values,
-                          touched,
-                          errors,
                           dirty,
                           isSubmitting,
-                          handleChange,
-                          handleBlur,
                           handleSubmit,
-                          handleReset,
                         } = props;
                         return (
                           <form onSubmit={handleSubmit}>

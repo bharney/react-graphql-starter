@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Mutation, Query } from 'react-apollo'
 import gql from 'graphql-tag'
 import { Formik, Field } from 'formik';
-import ProductList from './ProductList';
 import { withRouter } from 'react-router-dom';
 import Loading from "../Common/Loading"
 import { NotificationContext, alertTypes } from '../../context/NotificationProvider';
@@ -115,14 +114,9 @@ class UpdateProduct extends Component {
                             {props => {
                               const {
                                 values,
-                                touched,
-                                errors,
-                                dirty,
-                                isSubmitting,
                                 handleChange,
                                 handleBlur,
                                 handleSubmit,
-                                handleReset,
                               } = props;
                               debugger;
                               return (
@@ -158,17 +152,17 @@ class UpdateProduct extends Component {
                                     <label>Description:</label>
                                     <Field className="form-control" name="description" value={values.description} required type="text" />
                                   </div>
-                                  {values.type == "DRONE" && <div className="form-group">
+                                  {values.type === "DRONE" && <div className="form-group">
                                     <label>Range:</label>
                                     <Field className="form-control" name="range" value={values.range} required type="text" />
                                   </div>}
-                                  {values.type == "GAMING_PC" && <div className="form-group">
+                                  {values.type === "GAMING_PC" && <div className="form-group">
                                     <div className="form-check">
                                       <Field className="form-check-input" id="liquidCooled" name="liquidCooled" checked={values.liquidCooled} value={values.liquidCooled} type="checkbox" />
                                       <label className="form-check-label" htmlFor="liquidCooled">Liquid Cooled</label>
                                     </div>
                                   </div>}
-                                  {values.type == "BIKE" && <div className="form-group">
+                                  {values.type === "BIKE" && <div className="form-group">
                                     <label>Bike Type:</label>
                                     <select
                                       name="bikeType"

@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { Mutation, Query } from 'react-apollo'
 import gql from 'graphql-tag'
-import { Formik, Field } from 'formik';
-import Link from './Link';
 import Loading from "../Common/Loading"
 import { NotificationContext, alertTypes } from '../../context/NotificationProvider';
 
@@ -63,7 +61,7 @@ class DeleteProduct extends Component {
                       <div className="card-columns">
                         {linksToRender.map(product => (
                           <div key={product.name} className="card">
-                            <img className="card-img-top" src={product.image} alt="Card image cap" />
+                            <img className="card-img-top" src={product.image} alt="Product caption" />
                             <div className="card-body">
                               <h5 className="card-title">{product.name}</h5>
                               <p className="card-text">{product.description}</p>

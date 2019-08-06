@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
 import { withRouter } from 'react-router-dom';
-import Link from './Link';
 import Loading from "../Common/Loading"
 
 const GET_PRODUCTS = gql`
@@ -39,7 +38,7 @@ class UpdateProductList extends Component {
                   <div className="card-columns">
                     {linksToRender.map(product => (
                       <div key={product.name} className="card">
-                        <img className="card-img-top" src={product.image} alt="Card image cap" />
+                        <img className="card-img-top" src={product.image} alt="product caption" />
                         <div className="card-body">
                           <h5 className="card-title">{product.name}</h5>
                           <p className="card-text">{product.description}</p>

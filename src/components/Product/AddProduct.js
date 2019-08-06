@@ -75,14 +75,9 @@ class AddProduct extends Component {
                       {props => {
                         const {
                           values,
-                          touched,
-                          errors,
-                          dirty,
-                          isSubmitting,
                           handleChange,
                           handleBlur,
                           handleSubmit,
-                          handleReset,
                         } = props;
                         return (
                           <form onSubmit={handleSubmit}>
@@ -117,17 +112,17 @@ class AddProduct extends Component {
                               <label>Description:</label>
                               <Field className="form-control" name="description" value={values.description} required type="text" />
                             </div>
-                            {values.type == "DRONE" && <div className="form-group">
+                            {values.type === "DRONE" && <div className="form-group">
                               <label>Range:</label>
                               <Field className="form-control" name="range" value={values.range} required type="text" />
                             </div>}
-                            {values.type == "GAMING_PC" && <div className="form-group">
+                            {values.type === "GAMING_PC" && <div className="form-group">
                               <div className="form-check">
                                 <Field className="form-check-input" id="liquidCooled" name="liquidCooled" value={values.liquidCooled} type="checkbox" />
                                 <label className="form-check-label" htmlFor="liquidCooled">Liquid Cooled</label>
                               </div>
                             </div>}
-                            {values.type == "BIKE" && <div className="form-group">
+                            {values.type === "BIKE" && <div className="form-group">
                               <label>Bike Type:</label>
                               <select
                                 name="bikeType"
