@@ -7,7 +7,6 @@ import './styles/formInput.scss'
 import './styles/App.scss'
 import "./styles/toastr.scss"
 import { Route, Switch, withRouter, Redirect } from 'react-router-dom'
-import PrivateRoute from "./components/Common/PrivateRoute"
 import Nav from "./components/Common/Nav"
 import Auth from './components/Auth/Auth';
 import NavProvider from "./context/NavProvider"
